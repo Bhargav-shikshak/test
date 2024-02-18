@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { getDatabase, ref, onValue } from "firebase/database";
 import Popup from "./pop"; // Import the Popup component
 import "./green.css";
+
+
 // Import statements remain the same
 
 class Greens extends Component {
@@ -44,40 +46,40 @@ class Greens extends Component {
         <div>
           <h2>Teacher Data:</h2>
           <div className="table-container">
-            <table>
+            <table className="table-details ">
               <thead>
                 <tr>
-                 <th>Image</th>
+                  <th>Image</th>
                   <th>Name</th>
                   <th>Qualification</th>
                   <th>subject</th>
-               
-                  
                   <th>Actions</th>
+                  <th>Price</th>
+                 
                 </tr>
               </thead>
               <tbody>
                 {teacherData &&
                   Object.entries(teacherData).map(([key, value]) => (
                     <tr key={key} onClick={() => this.handleRowClick(key)}>
-                        <td>
-                  <img
-                    src={value.image}
-                    alt="Teacher"
-                    className="teacher-image"
-                  />
-                </td>
+                      <td>
+                        <img
+                          src={value.image}
+                          alt="Teacher"
+                          className="teacher-image"
+                        />
+                      </td>
                       <td>{value.teacherName}</td>
                       <td>{value.qualification}</td>
                       <td>{value.subject}</td>
-                     
-                      
                       <td>
                         <button onClick={(e) => {
                           e.stopPropagation();
                           this.handleRegisterClick(key);
-                        }}>Register</button>
+                        }}>Book Now</button>
                       </td>
+                   
+                      <td>{value.additionalNote}</td>
                     </tr>
                   ))}
               </tbody>
@@ -98,8 +100,7 @@ class Greens extends Component {
                 phone={teacherData[selectedTeacherForPopup].phone}
                 teacherId={teacherData[selectedTeacherForPopup].uid}
                 email={teacherData[selectedTeacherForPopup].email}
-                qualification={teacherData[selectedTeacherForPopup]. qualification}
-
+                qualification={teacherData[selectedTeacherForPopup].qualification}
                 onClose={this.closePopup}
               />
             )}
